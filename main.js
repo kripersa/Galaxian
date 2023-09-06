@@ -104,7 +104,7 @@ function initGame(resources) {
     })
 
     invidersBullets.forEach(bullet => {
-      bullet.y += 5
+      bullet.y += 10
       if (bullet.y > 600) {
         bullets = bullets.filter(b => b !== bullet)
         app.stage.removeChild(bullet);
