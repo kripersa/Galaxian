@@ -1,0 +1,11 @@
+body {
+  background-color: #65d2eb;
+  display: table;
+  margin: auto;
+  padding: 20px;
+}
+
+#root {
+    border: 5px rgb(150, 205, 92)  dotted;
+    border-radius:3px;
+}
