@@ -22,6 +22,8 @@ let containerDirectionY = 1;
 let containerSpeed = 1;
 let containerSpeedY = 0.5;
 let score = 0;
+let win = false;
+let body = document.querySelector("body");
 
 customLoader(assetsObj, initGame);
 
@@ -40,7 +42,6 @@ function initGame(resources) {
   addInviders(width, container, resources);
 
   let random = () => Math.random() * 4000 + 1000;
-
   function invaiderShoots(params) {
     setTimeout(() => {
       let randomInvaider =
@@ -123,9 +124,7 @@ function initGame(resources) {
       }
     });
 
-    if (container.children.length === 0) {
-      console.log("You Win");
-    }
+    winAndRestart(container, app.stage);
   });
 
   function BulletAndShooting() {
@@ -145,12 +144,10 @@ function initGame(resources) {
         bullet.x - 30 < container.children[i].x &&
         bullet.x > container.children[i].x - 30
       ) {
-        container.removeChild(container.children[i-1]);
+        container.removeChild(container.children[i - 1]);
         app.stage.removeChild(bullet);
       }
     }
-
-    console.log(container.children[0].y, container.children[0].x);
 
     if (container.x == 0) {
       app.ticker.add(containerMovesRight);
@@ -179,6 +176,19 @@ function initGame(resources) {
   }
 }
 
+function winAndRestart(container, stage) {
+  if (container.children.length === 0 && win === false) {
+    let winTex = new PIXI.Text("You Win!", { fontSize: 30 });
+    const button = document.createElement("button");
+    button.classList.add("restartButton");
+    button.innerHTML = "RESTRART";
+    body.appendChild(button);
+    winTex.x = 250;
+    winTex.y = 200;
+    stage.addChild(winTex);
+    win = true;
+  }
+}
 // achos bagia gasasworebeli
 window.addEventListener("keydown", (e) => {
   if (e.key === "d" && pressedButton !== "d") {
